@@ -1,0 +1,8 @@
+.character {
+  display: inline;
+  position: relative;
+  img {
+    position: absolute;
+    z-index: 10;
+  }
+}

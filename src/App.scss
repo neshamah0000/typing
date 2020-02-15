@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+.App {
+  text-align: center;
+  width: 80%;
+  margin: auto;
+}
+
+.stat {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  justify-items: start;
+}
+
+.inputcontent {
+  width: 100%;
+}
+
+.inputarea {
+  position: relative;
+  border: 1px solid red;
+
+  .mainarticle {
+    font-size: 2rem;
+    line-height: 4.5rem;
+    text-align: start;
+    margin-bottom: 2rem;
+  }
+
+  textarea {
+    position: absolute;
+    width: 100%;
+    font-size: 2rem;
+    left: 0;
+    top: 2.5rem;
+    z-index: -1;
+    height: 100%;
+    line-height: 4.5rem;
+    border: none;
+    outline: none;
+    resize: none;
+  }
+}
