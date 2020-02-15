@@ -11,6 +11,10 @@ function App() {
   const [start, setStart] = useState(false);
   const [selected, setSelected] = useState(null);
   const [clickBlankCount, setClickBlankCount] = useState(0);
+  const characters = content.split("");
+  const correctness = inputZone
+    .split("")
+    .map((i, idx) => i === characters[idx]);
 
   const alterSelected = idx => {
     setSelected(idx === selected ? null : idx);
@@ -29,6 +33,9 @@ function App() {
       setClickBlankCount(0);
       setSelected(null);
     }
+  };
+  const updateInput = input => {
+    setInputZone(input);
   };
 
   return (
@@ -58,7 +65,7 @@ function App() {
               autoFocus
               id="arena"
               value={inputZone}
-              onChange={e => setInputZone(e.target.value)}
+              onChange={e => updateInput(e.target.value)}
             ></textarea>
             <label htmlFor="arena">
               <SelectedContext.Provider
@@ -72,8 +79,7 @@ function App() {
                       <Character
                         key={idx}
                         id={idx}
-                        selected={selected}
-                        setSelected={setSelected}
+                        correctness={correctness[idx]}
                       >
                         {text}
                       </Character>

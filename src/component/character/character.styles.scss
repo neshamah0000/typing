@@ -7,4 +7,12 @@
     bottom: 100%;
     left: 0;
   }
+
+  &__correct {
+    background-color: gray;
+  }
+
+  &__wrong {
+    background-color: red;
+  }
 }
