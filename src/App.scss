@@ -16,7 +16,7 @@ html {
 .App {
   text-align: center;
   width: 80%;
-  margin: auto;
+  margin: 1.5rem auto;
 }
 
 .stat {
@@ -24,15 +24,46 @@ html {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   justify-items: start;
+  margin-top: 0.5rem;
 }
 
 .inputcontent {
   width: 100%;
+  margin: 1rem 0;
+  height: 65vh;
+  padding: 0.5rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  background-color: #394c73;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 3px;
+  transition: background-color 0.2s;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+
+  &:hover {
+    background-color: #0d87e9;
+  }
+
+  &:disabled,
+  &[disabled] {
+    opacity: 0.5;
+    cursor: inherit;
+
+    &:hover {
+      background-color: #394c73;
+    }
+  }
 }
 
 .inputarea {
   position: relative;
-  border: 1px solid red;
+  border: 5px solid #0096cd;
+  margin-top: 1rem;
 
   .mainarticle {
     font-size: 2rem;

@@ -10,8 +10,26 @@ function App() {
   const [inputZone, setInputZone] = useState("");
   const [start, setStart] = useState(false);
   const [selected, setSelected] = useState(null);
+  const [clickBlankCount, setClickBlankCount] = useState(0);
 
-  const alterSelected = idx => setSelected(idx === selected ? null : idx);
+  const alterSelected = idx => {
+    setSelected(idx === selected ? null : idx);
+    setClickBlankCount(0);
+  };
+  const updateState = () => {
+    setStart(!start);
+    if (start === false) {
+      setSelected(null);
+      setInputZone("");
+    }
+  };
+  const clickBlank = () => {
+    setClickBlankCount(clickBlankCount + 1);
+    if (clickBlankCount > 0) {
+      setClickBlankCount(0);
+      setSelected(null);
+    }
+  };
 
   return (
     <div className="App">
@@ -24,22 +42,20 @@ function App() {
         </div>
         {start ? null : (
           <textarea
+            autoFocus
             className="inputcontent"
             value={content}
             onChange={e => setContent(e.target.value)}
+            placeholder="在此貼上練習材料"
           ></textarea>
         )}
-        <button
-          onClick={() => {
-            setStart(!start);
-            if (start === false) setSelected(null);
-          }}
-        >
+        <button onClick={() => updateState()} disabled={!content.length}>
           {start ? "Puase" : "Start"}
         </button>
         {start ? (
           <div className="inputarea">
             <textarea
+              autoFocus
               id="arena"
               value={inputZone}
               onChange={e => setInputZone(e.target.value)}
@@ -48,7 +64,7 @@ function App() {
               <SelectedContext.Provider
                 value={{ selected: selected, setSelected: alterSelected }}
               >
-                <div className="mainarticle">
+                <div className="mainarticle" onClick={() => clickBlank()}>
                   {content.split("").map((text, idx) => {
                     return text.match(/\n/g) ? (
                       <br key={idx} />
