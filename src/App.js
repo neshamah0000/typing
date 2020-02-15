@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.scss";
 import Character from "./component/character/character.component";
+import SelectedContext from "./context/selected/selected.context";
 
 function App() {
   const [content, setContent] = useState(
@@ -9,6 +10,9 @@ function App() {
   const [inputZone, setInputZone] = useState("");
   const [start, setStart] = useState(false);
   const [selected, setSelected] = useState(null);
+
+  const alterSelected = idx => setSelected(idx === selected ? null : idx);
+
   return (
     <div className="App">
       <h1>中文打字練習</h1>
@@ -41,22 +45,26 @@ function App() {
               onChange={e => setInputZone(e.target.value)}
             ></textarea>
             <label htmlFor="arena">
-              <div className="mainarticle">
-                {content.split("").map((text, idx) => {
-                  return text.match(/\n/g) ? (
-                    <br key={idx} />
-                  ) : (
-                    <Character
-                      key={idx}
-                      id={idx}
-                      selected={selected}
-                      setSelected={setSelected}
-                    >
-                      {text}
-                    </Character>
-                  );
-                })}
-              </div>
+              <SelectedContext.Provider
+                value={{ selected: selected, setSelected: alterSelected }}
+              >
+                <div className="mainarticle">
+                  {content.split("").map((text, idx) => {
+                    return text.match(/\n/g) ? (
+                      <br key={idx} />
+                    ) : (
+                      <Character
+                        key={idx}
+                        id={idx}
+                        selected={selected}
+                        setSelected={setSelected}
+                      >
+                        {text}
+                      </Character>
+                    );
+                  })}
+                </div>
+              </SelectedContext.Provider>
             </label>
           </div>
         ) : null}
