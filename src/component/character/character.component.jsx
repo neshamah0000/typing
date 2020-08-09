@@ -16,7 +16,7 @@ const Character = ({ children, id, correctness }) => {
         {children}
       </span>
       {selected === id && big5 ? (
-        <img src={`/cjdict/${big5}.JPG`} alt={big5} />
+        <img src={`${process.env.REACT_APP_FILE_PATH}/${big5}.JPG`} alt={big5} />
       ) : null}
     </div>
   );
